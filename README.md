@@ -3,9 +3,10 @@ This project is about a monitoring stack that is running on an embedded system. 
 - a NAS through Prometheus SNMP Exporter
 - itself through Prometheus Node Exporter
 - some sensors through my homegrown Custom Exporter
+
 I am not commenting on the SNMP Exporter and Node Exporter as they are pretty much self explaining. Here my code for the sensors and the custom exporter is published.
 
-The custom exporter is written in Python. One sensor is running MicroPython, another sensor is running on C++.
+The custom exporter is written in Python. One sensor is running MicroPython, another sensor is running on C++. Check out the code.
 
 
 ### custom-exporter-sensors
