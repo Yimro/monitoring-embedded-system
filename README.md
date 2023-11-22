@@ -10,7 +10,7 @@ The custom exporter is written in Python. One sensor is running MicroPython, ano
 
 
 ### custom-exporter-sensors
-Python exporter for the sensors, using the python prometheus library. This exporter fetches data as a MQTT subscriber and makes them srcapable for Prometheus.
+Python exporter for the sensor nodes, uses the python prometheus exporter library. This exporter receives data as a MQTT subscriber and exports them.
 
 ### images
 Some photos

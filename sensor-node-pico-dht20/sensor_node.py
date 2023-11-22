@@ -1,10 +1,3 @@
-'''
-Main program for controlling the sensor node. Should be called main.py
-TODO: Pins for Display and DHT20 are still hard coded in the classes Display and Environment.
-TODO: This should be handled better, everything in a config.py file,
-TODO: classes should take their arguments from this config file.
-'''
-
 # built-in libraries:
 from machine import Pin, I2C, Timer, WDT, Pin
 from time import sleep_ms
@@ -15,7 +8,6 @@ from umqtt.simple2 import MQTTClient
 
 # home made libraries:
 import wifi
-import display
 import environment
 import config
 
@@ -48,23 +40,19 @@ class Node:
         print('publishing to broker ' + config.MQTT_BROKER_ADDR, end=': ')
         self.mqtt_client.publish(config.MQTT_PUBLISH_TOPIC, json_values)
 
+def loop():
+    myNode = Node()
+    sleep_ms(1000)
+    myWDT = WDT(timeout=7000)
+    while True:
 
-## in case a ssd1306 display is connected, settings see config.py ##
-# myDisplay = display.Display()
-# myNode.set_display(myDisplay)
+        led = Pin("LED", Pin.OUT)
+        led.value(1)
+        sleep_ms(100)
+        led.value(0)
 
-myNode = Node()
-sleep_ms(1000)
-myWDT = WDT(timeout=7000)
-while True:
-
-    led = Pin("LED", Pin.OUT)
-    led.value(1)
-    sleep_ms(100)
-    led.value(0)
-
-    d = myNode.env.get_values()
-    print(d)
-    myNode.publish_values()
-    myWDT.feed()
-    sleep_ms(2900)
+        d = myNode.env.get_values()
+        print(d)
+        myNode.publish_values()
+        myWDT.feed()
+        sleep_ms(2900)
