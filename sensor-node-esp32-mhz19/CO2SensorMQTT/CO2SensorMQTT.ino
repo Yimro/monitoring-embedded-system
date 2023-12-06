@@ -13,6 +13,7 @@ const char* password = PASSWORD; // Change this to your WiFi password
 const char* mqtt_server = "10.0.0.114";
 const char* out_topic = "node2/values";
 const char* in_topic = "node2/commands";
+int concentration;
 
 MHZ19 myMHZ19;                                             // Constructor for library
 

@@ -52,7 +52,7 @@ def loop():
         led.value(0)
 
         d = myNode.env.get_values()
-        print(d)
         myNode.publish_values()
+        print(d)
         myWDT.feed()
-        sleep_ms(2900)
+        sleep_ms(7000)
