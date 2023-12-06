@@ -68,7 +68,6 @@ if __name__ == "__main__":
     # Start the server thread
     server_thread.start()
 
-    print("ok")
 
     '''update instances '''
     with ThreadPoolExecutor() as executor:
