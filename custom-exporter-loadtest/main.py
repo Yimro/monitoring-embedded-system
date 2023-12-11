@@ -62,6 +62,11 @@ class ExporterManager:
                     print("update")
                 sleep(1)
 
+    def update_instances2(self):
+        while True:
+            for obj in self.list_of_exporters:
+                obj.inc_all_gauges()
+                sleep(1)
 
 
 class SDHTTPRequestHandler(BaseHTTPRequestHandler):
