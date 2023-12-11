@@ -6,7 +6,6 @@ from threading import Thread
 from functools import partial
 from time import sleep, perf_counter
 from typing import List
-
 from prometheus_client import start_http_server, Gauge, CollectorRegistry
 
 
@@ -96,4 +95,3 @@ if __name__ == "__main__":
 
     server_thread = Thread(target=server.serve_forever())
     server_thread.start()
-
