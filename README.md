@@ -6,11 +6,14 @@ This project is about a monitoring stack that is running on an embedded system. 
 
 I am not commenting on the SNMP Exporter and Node Exporter as they are pretty much self explaining. Here my code for the sensors and the custom exporter is published.
 
-The custom exporter is written in Python. One sensor is running MicroPython, another sensor is running on C++. Check out the code.
+The custom exporter is written in Python. It imports data from sensors, _sensor-node-pico-dht20_ and _sensor-node-esp32-mhz20_.
 
 
 ### custom-exporter-sensors
 Python exporter for the sensor nodes, uses the python prometheus exporter library. This exporter receives data as a MQTT subscriber and exports them.
+
+### custom-exporter-loadtest
+Python script that generates many exporters and a http service discovery server
 
 ### images
 Some photos
