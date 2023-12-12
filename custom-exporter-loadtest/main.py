@@ -16,6 +16,7 @@ class ExporterInstance:
         self.registry = CollectorRegistry()
         self.gauges_list = []
         self.port = port
+        self.id = id
         i = 0
         while i < number_of_metrics:
             gauge = self.create_gauge(id, i)  # create gauge with id and number
@@ -59,8 +60,9 @@ class ExporterManager:
             while True:
                 for obj in self.list_of_exporters:
                     executor.submit(inc_all_gauges_caller)
-                    print("update")
+                print(f'Updated Exporters: {[exporter.id for exporter in self.list_of_exporters]}')
                 sleep(1)
+
 
     def update_instances2(self):
         while True:
@@ -89,14 +91,14 @@ def start_server():
 
 
 if __name__ == "__main__":
-    manager = ExporterManager()
-    manager.create_exporters(10)
-    #manager.update_instances()
-    update_thread = Thread(target=manager.update_instances())
+    exporter_manager = ExporterManager()
+    exporter_manager.create_exporters(10)
+
+    update_thread = Thread(target=exporter_manager.update_instances())
     update_thread.start()
 
-    handler = partial(SDHTTPRequestHandler, manager.services_json_string)
-    server = HTTPServer(('', 19996), handler)
+    service_discovery_handler = partial(SDHTTPRequestHandler, manager.services_json_string)
+    service_discovery_server = HTTPServer(('', 19996), service_discovery_handler)
 
-    server_thread = Thread(target=server.serve_forever())
-    server_thread.start()
+    service_discovery_server_thread = Thread(target=service_discovery_server.serve_forever())
+    service_discovery_server_thread.start()
