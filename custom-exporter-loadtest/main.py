@@ -17,7 +17,9 @@ from time import sleep, perf_counter
 from typing import List
 from prometheus_client import start_http_server, Gauge, CollectorRegistry
 
-logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
+logging.basicConfig(filename='lt-exporter.log', format='%(asctime)s %(message)s', level=logging.INFO)
+# logging.basicConfig(handlers=[logging.FileHandler('lt-exporter.log'), logging.StreamHandler(sys.stdout)], format='%(asctime)s %(message)s', level=logging.INFO)
+
 class ExporterInstance:
     def __init__(self, id: int, number_of_metrics: int, init_value: int, port: int):
         self.registry = CollectorRegistry()
@@ -27,8 +29,8 @@ class ExporterInstance:
         for i, gauge in enumerate(self.gauges_list):
             gauge.set(init_value + i)
 
-        #logging.info(f'Created exporter id nr {self.id} with {number_of_metrics} gauges.')
-        #logging.info(f'Init gauge 0: {init_value}, init gauge {number_of_metrics-1}: {init_value + number_of_metrics - 1}')
+        logging.info(f'Created exporter id nr {self.id} with {number_of_metrics} gauges.')
+        logging.info(f'Init gauge 0: {init_value}, init gauge {number_of_metrics-1}: {init_value + number_of_metrics - 1}')
 
         try:
             start_http_server(port, registry=self.registry)
