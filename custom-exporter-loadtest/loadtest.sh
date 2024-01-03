@@ -2,11 +2,19 @@
 
 number_of_exporters=(10 20 40 80 100 200 400)
 number_of_metrics=(100 200 400 800)
-echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++" > auto_test_log.txt
-echo "$(date): ---Starting script---" >> auto_test_log.txt
-echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++" >> auto_test_log.txt
 
-echo "looking for scripts to kill ..."
+
+function zpquery() {
+   if [[ -z "$1" ]]; then echo "usage: zpquery <PromQL Query> [<jq selector>]";
+   else curl -s "http://10.0.0.116:9090/api/v1/query" --data-urlencode "query=$1" | jq $2
+   fi
+}
+
+echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" > auto_test_log.txt
+echo "$(date): ---Starting Load Testing Script---" >> auto_test_log.txt
+echo "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" >> auto_test_log.txt
+
+echo "Looking for scripts to kill ..."
 list1=$(ps -ax | grep -E "python3 ./main.py" | grep -v -e "grep" | cut -d ' ' -f 1);
 if [[ -n $list1 ]]; then
     echo "found pids to kill: $list1"
@@ -19,10 +27,11 @@ for i in "${number_of_exporters[@]}"; do
     echo "$(date): $i exporters, $j metrics each"
     echo "$(date): $i exporters, $j metrics each" >> auto_test_log.txt
     ./main.py $i $j &
-    #sleep 1
-    pause=90   # pause sollte mind 1m sek sein
+
+    pause=90   # pause sollte mind 1 Minute sein, damit HTTP SD abgefragt wird und Endpunkte bekannt sind.
     echo "---Waiting $pause secs for prometheus server to scrape HTTP service discovery---"
 
+    # pause countdown
     while [ $pause -gt 0 ]; do
        echo -ne " $pause\033[0K\r"
        let "pause=pause-1"
