@@ -25,9 +25,10 @@ class ExporterInstance:
         self.registry = CollectorRegistry()
         self.port = port
         self.id = id
+        self.init_value = init_value
         self.gauges_list = [self.create_gauge(id, i) for i in range(number_of_metrics)]
-        for i, gauge in enumerate(self.gauges_list):
-            gauge.set(init_value + i)
+        #for i, gauge in enumerate(self.gauges_list):
+        #    gauge.set(init_value + i)
 
         logging.info(f'Created exporter id nr {self.id} with {number_of_metrics} gauges.')
         logging.info(f'Init gauge 0: {init_value}, init gauge {number_of_metrics-1}: {init_value + number_of_metrics - 1}')
@@ -51,6 +52,9 @@ class ExporterInstance:
         for gauge in self.gauges_list:
             gauge.dec(val)
 
+    def reset_all_gauges(self):
+        for i, gauge in enumerate(self.gauges_list):
+            gauge.set(self.init_value + i)
 
 class ExporterManager:
     def __init__(self):
@@ -67,21 +71,25 @@ class ExporterManager:
 
 
     def update_instances(self):
-        direction = 1
+#        direction = 1
         while True:
             for i in range(600):
-                t1 = perf_counter()
-                if direction == 1:
-                    for exporter in self.list_of_exporters:
-                        exporter.inc_all_gauges(0.1)
-                else:
-                    for exporter in self.list_of_exporters:
-                        exporter.dec_all_gauges(0.1)
-                        #print(f"dec all {i}")
-                t2 = perf_counter()
-                logging.debug(f'update_instances: it took {str(t2-t1)} seconds to update {len(self.list_of_exporters)} exporters.')
+#                t1 = perf_counter()
+#                if direction == 1:
+                for exporter in self.list_of_exporters:
+                    exporter.inc_all_gauges(0.1)
                 sleep(1)
-            direction *= -1
+            for exporter in self.list_of_exporters:
+                exporter.reset_all_gauges()
+
+ #               else:
+ #                   for exporter in self.list_of_exporters:
+#                      exporter.dec_all_gauges(0.1)
+                        #print(f"dec all {i}")
+#                t2 = perf_counter()
+#                logging.debug(f'update_instances: it took {str(t2-t1)} seconds to update {len(self.list_of_exporters)} exporters.')
+#                sleep(1)
+#            direction *= -1
 
 
 class SDHTTPRequestHandler(BaseHTTPRequestHandler):

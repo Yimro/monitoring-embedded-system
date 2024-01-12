@@ -1,7 +1,7 @@
 #!/bin/bash
 
-number_of_exporters=(10 50 100 200 300)
-number_of_metrics=(100 200 300)
+number_of_exporters=(10 50 100)
+number_of_metrics=(100 200)
 file=query_list
 timestamp=$(date +%+y%+m%+d%+k%+M)
 logfile=log/loadtest_log_$timestamp.txt
@@ -10,7 +10,7 @@ echo "time;num_exporter;num_metrics;query;jq_selector;exporter;description;value
 
 function kills() {
     echo "Looking for scripts to kill ..."
-    list1=$(ps -ax | grep -E "python3 ./main.py" | grep -v -e "grep" | cut -d ' ' -f 1);
+    list1=$(ps -ax | grep -E "./loadtest-main.py" | grep -v -e "grep" | cut -d ' ' -f 3);
     if [[ -n $list1 ]]; then
         echo "found pids to kill: $list1"
         for pid in $list1; do kill $pid; done
@@ -27,7 +27,7 @@ kills
 for expcount in "${number_of_exporters[@]}"; do
     for metcount in "${number_of_metrics[@]}"; do
     echo "$(date): $expcount exporters, $metcount metrics each"
-    ./main.py $expcount $metcount &
+    ./loadtest-main.py $expcount $metcount &
 
     pause=90   # pause sollte mind 1 Minute (65) sein, damit HTTP SD abgefragt wird und Endpunkte bekannt sind.
     echo "---Waiting $pause secs for prometheus server to scrape HTTP service discovery---" | tee -a $logfile
@@ -58,7 +58,7 @@ for expcount in "${number_of_exporters[@]}"; do
     fi
     done <$file
 
-    script_pid=$(ps -ax | grep -E "python3 ./main.py $expcount $metcount" | grep -v -e "grep" | cut -d ' ' -f 1)
+    script_pid=$(ps -ax | grep -E "loadtest-main.py $expcount $metcount" | grep -v -e "grep" | cut -d ' ' -f 3)
     echo "killing pid $script_pid..." | tee -a $logfile;
         kill $script_pid;
     done
