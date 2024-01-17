@@ -13,9 +13,11 @@ count({__name__=~"Gauge_.+", job="load_test"});.data.result[0].value[1];Load Tes
 # Grand Total of all Gauges values in all instances
 sum({__name__=~"Gauge_.+", job="load_test"});.data.result[0].value[1];Load Test;Grand total of all Gauge values on all Instances
 
-
 # Average of all Gauges values in all instances
 avg({__name__=~"Gauge_.+", job="load_test"});.data.result[0].value[1];Load Test;Average of all Gauge values on all Instances
+
+# Get all gauges over ...
+# ({__name__=~"Gauge_.+"}[3h]);.data.result[0].values[1][1];Load test;Huge List of Gauges, just 1st item
 
 # Prometheus Queries:
 ######################################################################
@@ -25,17 +27,24 @@ prometheus_sd_discovered_targets{config="load_test",name="scrape"};.data.result[
 # SD refresh duration
 prometheus_sd_refresh_duration_seconds{mechanism="http",quantile="0.99"};.data.result[0].value[1];Prometheus;HTTP SD Refresh duration
 
-# HELP prometheus_target_scrape_pool_targets Current number of targets in this scrape pool.
-# TYPE prometheus_target_scrape_pool_targets gauge
+# Prometheus_target_scrape_pool_targets Current number of targets in this scrape pool.
 prometheus_target_scrape_pool_targets{scrape_job="load_test"};.data.result[0].value[1];Prometheus;Current number of Targets in Scrape Pool
 
-# Time to sync the scrape pool (total time)
-prometheus_target_sync_length_seconds_sum{scrape_job="load_test"};.data.result[0].value[1];Prometheus;Total time to sync scrape pool
+# Time to Sync Scrape Pool Quantile 0.5
+prometheus_target_sync_length_seconds{scrape_job="load_test",quantile="0.5"};.data.result[0].value[1];Prometheus;Time to sync Scrape pool Quantile 0.5
+
+# Connection failed all jobs 1 m
+sum(net_conntrack_dialer_conn_failed_total{}) - sum(net_conntrack_dialer_conn_failed_total{} offset 1m);.data.result[0].value[1];Prometheus;Connection failed all jobs 1m
+
+# Connection failed all targets 1 m
+sum(net_conntrack_dialer_conn_failed_total{dialer_name="load_test"}) - sum(net_conntrack_dialer_conn_failed_total{dialer_name="load_test"} offset 1m);.data.result[0].value[1];Prometheus;Connection failed job Load Test 1m
 
 # Connection failed total all
-sum(net_conntrack_dialer_conn_failed_total);.data.result[0].value[1];Prometheus;Connection failed total all
+# sum(net_conntrack_dialer_conn_failed_total);.data.result[0].value[1];Prometheus;Connection failed total all
 # Connection failed dialer_name load test
-sum(net_conntrack_dialer_conn_failed_total{dialer_name="load_test"});.data.result[0].value[1];Prometheus;Connection failed total load test
+# sum(net_conntrack_dialer_conn_failed_total{dialer_name="load_test"});.data.result[0].value[1];Prometheus;Connection failed total load test
+
+
 
 # Node Exporter Queries:
 ######################################################################

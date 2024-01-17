@@ -4,8 +4,8 @@ number_of_exporters=(10 50 100)
 number_of_metrics=(100 200)
 file=query_list
 timestamp=$(date +%+y%+m%+d%+k%+M)
-logfile=log/loadtest_log_$timestamp.txt
-datafile=log/loadtest_data_$timestamp.csv
+logfile=log/loadtest2_log_$timestamp.txt
+datafile=log/loadtest2_data_$timestamp.csv
 echo "time;num_exporter;num_metrics;query;jq_selector;exporter;description;value" > $datafile
 
 function kills() {

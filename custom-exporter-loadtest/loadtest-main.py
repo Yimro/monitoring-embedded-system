@@ -17,7 +17,8 @@ from time import sleep, perf_counter
 from typing import List
 from prometheus_client import start_http_server, Gauge, CollectorRegistry
 
-logging.basicConfig(filename='log/lt-exporter.log', format='%(asctime)s %(message)s', level=logging.INFO)
+logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
+# logging.basicConfig(filename='log/lt-exporter.log', format='%(asctime)s %(message)s', level=logging.INFO)
 # logging.basicConfig(handlers=[logging.FileHandler('lt-exporter.log'), logging.StreamHandler(sys.stdout)], format='%(asctime)s %(message)s', level=logging.INFO)
 
 class ExporterInstance:
