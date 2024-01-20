@@ -3,6 +3,7 @@
 Command line arguments:
 1st: number of exporters
 2nd: number of metrics for each exporter
+3rd: number of additional labels
 '''
 import sys
 import json
