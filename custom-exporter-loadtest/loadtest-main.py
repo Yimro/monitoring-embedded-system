@@ -70,28 +70,15 @@ class ExporterManager:
             self.services_dict['targets'].append('10.0.0.103:' + str(10000 + i))
         self.services_json_string = "[" + json.dumps(self.services_dict) + "]"
 
-
     def update_instances(self):
-#        direction = 1
         while True:
             for i in range(600):
 #                t1 = perf_counter()
-#                if direction == 1:
                 for exporter in self.list_of_exporters:
                     exporter.inc_all_gauges(0.1)
                 sleep(1)
             for exporter in self.list_of_exporters:
                 exporter.reset_all_gauges()
-
- #               else:
- #                   for exporter in self.list_of_exporters:
-#                      exporter.dec_all_gauges(0.1)
-                        #print(f"dec all {i}")
-#                t2 = perf_counter()
-#                logging.debug(f'update_instances: it took {str(t2-t1)} seconds to update {len(self.list_of_exporters)} exporters.')
-#                sleep(1)
-#            direction *= -1
-
 
 class SDHTTPRequestHandler(BaseHTTPRequestHandler):
     def __init__(self, services_json_string, *args, **kwargs):
