@@ -59,16 +59,29 @@ class ExporterInstance:
 
 class ExporterManager:
     def __init__(self):
+        self.label_dict = None
         self.list_of_exporters = []
-        self.services_dict = {'targets': [], 'labels':{'name':'zombie', 'location':'potsdam'}}
+        #self.services_dict = {'targets': [], 'labels':{'name':'zombie', 'location':'potsdam'}}
+        self.services_dict = {'targets':[], 'labels':{'name':'load test', 'location':'potsdam'}}
         self.services_json_string = ""
 
-    def create_exporters(self, num_exporters, num_metrics, init_value=0, init_port=10000):
+    def create_exporters(self, num_exporters, num_metrics, num_labels=10, init_value=0, init_port=10000):
         for i in range(num_exporters):
             obj = ExporterInstance(i, num_metrics, init_value+(10*i), init_port + i)
             self.list_of_exporters.append(obj)
-            self.services_dict['targets'].append('10.0.0.103:' + str(10000 + i))
+            self.services_dict['targets'].append('10.0.0.103:' + str(init_port + i))
+            self.services_dict['labels']['number of exporters']=num_exporters
+            self.services_dict['labels']['number of metrics per exporter']=num_metrics
+            self.services_dict['labels']['number of additional fake labels']=num_labels
+            self.services_dict['labels']['total number of metrics'] = num_labels*num_exporters
+            self.services_dict['labels'].update(self.create_label_dict(num_labels))
         self.services_json_string = "[" + json.dumps(self.services_dict) + "]"
+
+    def create_label_dict(self, n:int):
+        self.label_dict = {}
+        for i in range(n):
+            self.label_dict['key_'+str(i)]=str('value_'+str(i))
+        return self.label_dict
 
     def update_instances(self):
         while True:
@@ -95,8 +108,9 @@ class SDHTTPRequestHandler(BaseHTTPRequestHandler):
 if __name__ == "__main__":
     exporter_manager = ExporterManager()
     try:
-        logging.info(f'main: creating {sys.argv[1]} exporter(s) with each {sys.argv[2]} metrics')
-        exporter_manager.create_exporters(int(sys.argv[1]), int(sys.argv[2]))
+        logging.info(f'main: creating {sys.argv[1]} exporter(s) with each {sys.argv[2]} metrics. Job has {sys.argv[3]} '
+                     f'additional fake labels')
+        exporter_manager.create_exporters(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]))
         update_thread = Thread(target=exporter_manager.update_instances)
         update_thread.start()
 
