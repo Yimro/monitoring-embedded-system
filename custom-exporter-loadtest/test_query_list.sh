@@ -7,6 +7,8 @@ if [[ -z $1 ]]; then
     exit
 fi
 
+echo "---------------- Query file: $1 --------------------"
+
 while read -r line; do
 if [[ ! $line =~ ^# && -n $line ]] ; then
     # split line in query and jq argument:
@@ -14,13 +16,7 @@ if [[ ! $line =~ ^# && -n $line ]] ; then
     jqselector=$(echo "$line" | cut -d ";" -f 2)
     exporter=$(echo "$line" | cut -d ";" -f 3)
     description=$(echo "$line" | cut -d ";" -f 4)
-#    echo "---------------- new query: --------------------"
-#    echo "Querying: $query"
-#    echo  "JQ selector: $jqselector"
-
     value=$(curl -s http://10.0.0.116:9090/api/v1/query --data-urlencode "query=$query" | jq "$jqselector")
-    echo -e "$description: $value"
-#    echo "$(date +%s);$expcount;$metcount;$query;$jqselector;$exporter;$description;$value" # | tee -a $datafile
-
+    echo -e "$description;$value" | tee -a output.csv
 fi
 done <$file
