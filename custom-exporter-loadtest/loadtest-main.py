@@ -3,7 +3,7 @@
 Command line arguments:
 1st: number of exporters
 2nd: number of metrics for each exporter
-3rd: number of additional labels
+3rd: number of labels
 '''
 import sys
 import json
@@ -63,7 +63,7 @@ class ExporterManager:
         self.label_dict = {}
         self.list_of_exporters = []
         #self.services_dict = {'targets': [], 'labels':{'name':'zombie', 'location':'potsdam'}}
-        self.services_dict = {'targets':[], 'labels':{'job_name':'load_test', 'location':'potsdam'}}
+        self.services_dict = {'targets':[], 'labels':{}}
         self.services_json_string = ""
 
     def create_exporters(self, num_exporters, num_metrics, num_labels=10, init_value=0, init_port=10000):
