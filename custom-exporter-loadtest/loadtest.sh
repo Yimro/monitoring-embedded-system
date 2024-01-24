@@ -1,7 +1,7 @@
 #!/bin/bash
 
-number_of_exporters=(10 50)
-number_of_metrics=(100 200)
+number_of_exporters=(50 100)
+number_of_metrics=(100 200 400)
 number_of_labels=(10 50 100)
 query_list=$1
 timestamp=$(date +%+y%+m%+d%+k%+M)
@@ -9,7 +9,7 @@ logfile=log/loadtest2_log_$timestamp.txt
 datafile=log/loadtest2_data_$timestamp.csv
 
 if [[ -z $1 ]]; then
-    echo "usage: test_query_list <filename>"
+    echo "usage: loadtest.sh <filename>"
     exit
 fi
 
