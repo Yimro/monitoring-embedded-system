@@ -16,7 +16,10 @@ if [[ ! $line =~ ^# && -n $line ]] ; then
     jqselector=$(echo "$line" | cut -d ";" -f 2)
     exporter=$(echo "$line" | cut -d ";" -f 3)
     description=$(echo "$line" | cut -d ";" -f 4)
+    start=`date +%s`
     value=$(curl -s http://10.0.0.116:9090/api/v1/query --data-urlencode "query=$query" | jq "$jqselector")
-    echo -e "$description;$value" | tee -a output.csv
+    end=`date +%s`
+    runtime=$((end-start))
+    echo -e "$description;$value;runtime curl command: $runtime seconds." | tee -a output.csv
 fi
 done <$file
