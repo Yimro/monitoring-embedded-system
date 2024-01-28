@@ -1,7 +1,7 @@
 #!/bin/bash
 
-number_of_exporters=(50 100)
-number_of_metrics=(100 200 400)
+number_of_exporters=(50 100 200)
+number_of_metrics=(100 200)
 number_of_labels=(10 50 100)
 query_list=$1
 timestamp=$(date +%+y%+m%+d%+k%+M)
@@ -14,7 +14,7 @@ if [[ -z $1 ]]; then
 fi
 
 # create datafile
-echo "time;num_exporter;num_metrics;num_labels;query;jq_selector;exporter;description;value" > $datafile
+echo "time;num_exporter;num_metrics;num_labels;query;jq_selector;exporter;description;value;runtime" > $datafile
 
 # kill all endpoints
 function kills() {
@@ -61,10 +61,12 @@ for expcount in "${number_of_exporters[@]}"; do
                 echo "---------------- new query: --------------------"
                 echo "Querying: $query"
                 echo  "JQ selector: $jqselector"
-
+                start=`date +%s`
                 value=$(curl -s http://10.0.0.116:9090/api/v1/query --data-urlencode "query=$query" | jq "$jqselector")
+                end=`date +%s`
+                runtime=$((end-start))
                 echo "Value: $value"
-                echo "$(date +%s);$expcount;$metcount;$labelcount;$query;$jqselector;$exporter;$description;$value" | tee -a $datafile
+                echo "$(date +%s);$expcount;$metcount;$labelcount;$query;$jqselector;$exporter;$description;$value;$runtime" | tee -a $datafile
             fi
             done <$query_list
 
