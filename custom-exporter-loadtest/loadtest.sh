@@ -61,10 +61,10 @@ for expcount in "${number_of_exporters[@]}"; do
                 echo "---------------- new query: --------------------"
                 echo "Querying: $query"
                 echo  "JQ selector: $jqselector"
-                start=`date +%s`
+                start=`date +%s.%N`
                 value=$(curl -s http://10.0.0.116:9090/api/v1/query --data-urlencode "query=$query" | jq "$jqselector")
-                end=`date +%s`
-                runtime=$((end-start))
+                start=`date +%s.%N`
+                runtime=$(echo "scale=3; ($end-$start)" | bc);
                 echo "Value: $value"
                 echo "$(date +%s);$expcount;$metcount;$labelcount;$query;$jqselector;$exporter;$description;$value;$runtime" | tee -a $datafile
             fi
