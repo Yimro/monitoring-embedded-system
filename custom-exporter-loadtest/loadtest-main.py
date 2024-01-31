@@ -32,8 +32,8 @@ class ExporterInstance:
         #for i, gauge in enumerate(self.gauges_list):
         #    gauge.set(init_value + i)
 
-        logging.info(f'Created exporter id nr {self.id} with {number_of_metrics} gauges.')
-        logging.info(f'Init gauge 0: {init_value}, init gauge {number_of_metrics-1}: {init_value + number_of_metrics - 1}')
+        #logging.info(f'Created exporter id nr {self.id} with {number_of_metrics} gauges.')
+        #logging.info(f'Init gauge 0: {init_value}, init gauge {number_of_metrics-1}: {init_value + number_of_metrics - 1}')
 
         try:
             start_http_server(port, registry=self.registry)
@@ -67,6 +67,7 @@ class ExporterManager:
         self.services_json_string = ""
 
     def create_exporters(self, num_exporters, num_metrics, num_labels=10, init_value=0, init_port=10000):
+        logging.info(f'Creating {num_exporters} exporters with {num_metrics} metrics and {num_labels} labels.')
         for i in range(num_exporters):
             obj = ExporterInstance(i, num_metrics, init_value+(10*i), init_port + i)
             self.list_of_exporters.append(obj)

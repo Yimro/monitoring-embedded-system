@@ -1,7 +1,7 @@
 #!/bin/bash
 
-number_of_exporters=(50 100 200)
-number_of_metrics=(100 200)
+number_of_exporters=(10 50 100 200)
+number_of_metrics=(50 100 200)
 number_of_labels=(10 50 100)
 query_list=$1
 timestamp=$(date +%+y%+m%+d%+k%+M)
@@ -59,11 +59,10 @@ for expcount in "${number_of_exporters[@]}"; do
                 exporter=$(echo "$line" | cut -d ";" -f 3)
                 description=$(echo "$line" | cut -d ";" -f 4)
                 echo "---------------- new query: --------------------"
-                echo "Querying: $query"
-                echo  "JQ selector: $jqselector"
+                echo "Querying: $query , JQ selector: $jqselector"
                 start=`date +%s.%N`
                 value=$(curl -s http://10.0.0.116:9090/api/v1/query --data-urlencode "query=$query" | jq "$jqselector")
-                start=`date +%s.%N`
+                end=`date +%s.%N`
                 runtime=$(echo "scale=3; ($end-$start)" | bc);
                 echo "Value: $value"
                 echo "$(date +%s);$expcount;$metcount;$labelcount;$query;$jqselector;$exporter;$description;$value;$runtime" | tee -a $datafile
