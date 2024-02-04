@@ -7,15 +7,11 @@ Command line arguments:
 '''
 import sys
 import json
-import random
-import datetime
 import logging
-from concurrent.futures import ThreadPoolExecutor
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from threading import Thread
 from functools import partial
-from time import sleep, perf_counter
-from typing import List
+from time import sleep
 from prometheus_client import start_http_server, Gauge, CollectorRegistry
 
 logging.basicConfig(format='%(asctime)s %(message)s', level=logging.INFO)
@@ -29,8 +25,6 @@ class ExporterInstance:
         self.id = id
         self.init_value = init_value
         self.gauges_list = [self.create_gauge(id, i) for i in range(number_of_metrics)]
-        #for i, gauge in enumerate(self.gauges_list):
-        #    gauge.set(init_value + i)
 
         #logging.info(f'Created exporter id nr {self.id} with {number_of_metrics} gauges.')
         #logging.info(f'Init gauge 0: {init_value}, init gauge {number_of_metrics-1}: {init_value + number_of_metrics - 1}')
@@ -62,7 +56,6 @@ class ExporterManager:
     def __init__(self):
         self.label_dict = {}
         self.list_of_exporters = []
-        #self.services_dict = {'targets': [], 'labels':{'name':'zombie', 'location':'potsdam'}}
         self.services_dict = {'targets':[], 'labels':{}}
         self.services_json_string = ""
 
@@ -72,10 +65,6 @@ class ExporterManager:
             obj = ExporterInstance(i, num_metrics, init_value+(10*i), init_port + i)
             self.list_of_exporters.append(obj)
             self.services_dict['targets'].append('10.0.0.103:' + str(init_port + i))
-            #self.services_dict['labels']['number of exporters']=num_exporters
-            #self.services_dict['labels']['number of metrics per exporter']=num_metrics
-            #self.services_dict['labels']['number of additional fake labels']=num_labels
-            #self.services_dict['labels']['total number of metrics'] = num_labels*num_exporters
             self.services_dict['labels'].update(self.create_label_dict(num_labels))
         self.services_json_string = "[" + json.dumps(self.services_dict) + "]"
 
@@ -87,7 +76,6 @@ class ExporterManager:
     def update_instances(self):
         while True:
             for i in range(600):
-#                t1 = perf_counter()
                 for exporter in self.list_of_exporters:
                     exporter.inc_all_gauges(0.1)
                 sleep(1)
@@ -118,7 +106,6 @@ if __name__ == "__main__":
         service_discovery_handler = partial(SDHTTPRequestHandler, exporter_manager.services_json_string)
         service_discovery_server = HTTPServer(('', 19996), service_discovery_handler)
         logging.info(f'HTTP Service Discovery is listening on port 19996')
-
 
         service_discovery_server_thread = Thread(target=service_discovery_server.serve_forever)
         service_discovery_server_thread.start()
