@@ -97,8 +97,8 @@ class SDHTTPRequestHandler(BaseHTTPRequestHandler):
 if __name__ == "__main__":
     exporter_manager = ExporterManager()
     try:
-        logging.info(f'main: creating {sys.argv[1]} exporter(s) with each {sys.argv[2]} metrics. Job has {sys.argv[3]} '
-                     f'additional fake labels')
+        # logging.info(f'main: creating {sys.argv[1]} exporter(s) with each {sys.argv[2]} metrics. Job has {sys.argv[3]} '
+                     # f'labels')
         exporter_manager.create_exporters(int(sys.argv[1]), int(sys.argv[2]), int(sys.argv[3]))
         update_thread = Thread(target=exporter_manager.update_instances)
         update_thread.start()

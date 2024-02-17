@@ -19,7 +19,6 @@ echo "time;num_exporter;num_metrics;num_labels;query;jq_selector;exporter;descri
 # kill all endpoints
 function kills() {
     echo "Looking for scripts to kill ..."
-    #list1=$(ps -ax | grep -E "./loadtest-main.py" | grep -v -e "grep" | cut -d ' ' -f 2);
     list1=$(ps -ax | grep -E "./loadtest-main.py" | grep -v -e "grep" | awk '{print $1}');
     if [[ -n $list1 ]]; then
         echo "found pids to kill: $list1"
