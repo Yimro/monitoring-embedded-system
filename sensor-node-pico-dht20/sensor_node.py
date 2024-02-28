@@ -6,7 +6,7 @@ import network, socket, gc, json
 # external libraries:
 from umqtt.simple2 import MQTTClient
 
-# home made libraries:
+# other modules:
 import wifi
 import environment
 import config
@@ -16,6 +16,7 @@ class Node:
         self.ip = self.connect_wlan('10.0.0.122', '255.255.254.0', '10.0.0.1', '10.0.0.1')
         self.env = environment.Env()
         self.display = None
+        self.tm1637=tm1637.TM1637(clk=Pin(CLK),dio=Pin(DIO))
         sleep_ms(100)
         self.mqtt_client = MQTTClient(config.MQTT_CLIENT_ID, config.MQTT_BROKER_ADDR, port=1883)
         self.mqtt_client.connect()
@@ -56,3 +57,4 @@ def loop():
         print(d)
         myWDT.feed()
         sleep_ms(7000)
+loop()

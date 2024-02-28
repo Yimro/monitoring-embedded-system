@@ -18,6 +18,10 @@ DC = 17 # Data / Command
 CS = 16 # Chip Select
 RST = 20 # Reset
 
+#tm1637 settings
+DIO = 0
+CLK = 1
+
 # mqtt settings:
 MQTT_CLIENT_ID = 'node_1'
 # MQTT_BROKER_ADDR = '10.0.0.103' # address of mqtt broker
