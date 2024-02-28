@@ -1,0 +1,100 @@
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Tue Jan 30 11:25:34 PM CET 2024: ---Starting Load Testing Script---
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Tue Jan 30 11:25:34 PM CET 2024: 10 exporters, 50 metrics each and total number of labels 10
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Tue Jan 30 11:25:49 PM CET 2024: ---Starting Load Testing Script---
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Tue Jan 30 11:25:49 PM CET 2024: 10 exporters, 50 metrics each and total number of labels 10
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 86539...
+Tue Jan 30 11:27:21 PM CET 2024: 10 exporters, 50 metrics each and total number of labels 50
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 87201...
+Tue Jan 30 11:28:53 PM CET 2024: 10 exporters, 50 metrics each and total number of labels 100
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 87877...
+Tue Jan 30 11:30:25 PM CET 2024: 10 exporters, 100 metrics each and total number of labels 10
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 88517...
+Tue Jan 30 11:31:57 PM CET 2024: 10 exporters, 100 metrics each and total number of labels 50
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 89157...
+Tue Jan 30 11:33:30 PM CET 2024: 10 exporters, 100 metrics each and total number of labels 100
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 89811...
+Tue Jan 30 11:35:03 PM CET 2024: 10 exporters, 200 metrics each and total number of labels 10
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 90509...
+Tue Jan 30 11:36:36 PM CET 2024: 10 exporters, 200 metrics each and total number of labels 50
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 91170...
+Tue Jan 30 11:38:10 PM CET 2024: 10 exporters, 200 metrics each and total number of labels 100
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 91855...
+Tue Jan 30 11:39:43 PM CET 2024: 50 exporters, 50 metrics each and total number of labels 10
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 92494...
+Tue Jan 30 11:41:18 PM CET 2024: 50 exporters, 50 metrics each and total number of labels 50
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 93304...
+Tue Jan 30 11:42:53 PM CET 2024: 50 exporters, 50 metrics each and total number of labels 100
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 94239...
+Tue Jan 30 11:44:29 PM CET 2024: 50 exporters, 100 metrics each and total number of labels 10
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 95179...
+Tue Jan 30 11:46:06 PM CET 2024: 50 exporters, 100 metrics each and total number of labels 50
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 96124...
+Tue Jan 30 11:47:46 PM CET 2024: 50 exporters, 100 metrics each and total number of labels 100
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 97073...
+Tue Jan 30 11:49:24 PM CET 2024: 50 exporters, 200 metrics each and total number of labels 10
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 98013...
+Tue Jan 30 11:51:06 PM CET 2024: 50 exporters, 200 metrics each and total number of labels 50
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 98979...
+Tue Jan 30 11:52:50 PM CET 2024: 50 exporters, 200 metrics each and total number of labels 100
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 99945...
+Tue Jan 30 11:54:35 PM CET 2024: 100 exporters, 50 metrics each and total number of labels 10
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 100924...
+Tue Jan 30 11:56:22 PM CET 2024: 100 exporters, 50 metrics each and total number of labels 50
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 102114...
+Tue Jan 30 11:58:07 PM CET 2024: 100 exporters, 50 metrics each and total number of labels 100
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 103484...
+Tue Jan 30 11:59:50 PM CET 2024: 100 exporters, 100 metrics each and total number of labels 10
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 104838...
+Wed Jan 31 12:02:29 AM CET 2024: 100 exporters, 100 metrics each and total number of labels 50
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 106789...
+Wed Jan 31 12:04:28 AM CET 2024: 100 exporters, 100 metrics each and total number of labels 100
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 108274...
+Wed Jan 31 12:06:20 AM CET 2024: 100 exporters, 200 metrics each and total number of labels 10
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 110524...
+Wed Jan 31 12:15:13 AM CET 2024: 100 exporters, 200 metrics each and total number of labels 50
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 112539...
+Wed Jan 31 12:40:28 AM CET 2024: 100 exporters, 200 metrics each and total number of labels 100
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 115530...
+Wed Jan 31 08:58:44 AM CET 2024: 200 exporters, 50 metrics each and total number of labels 10
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 118772...
+Wed Jan 31 09:00:33 AM CET 2024: 200 exporters, 50 metrics each and total number of labels 50
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 120929...
+Wed Jan 31 09:03:11 AM CET 2024: 200 exporters, 50 metrics each and total number of labels 100
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
+killing pid 123810...
+Wed Jan 31 09:12:20 AM CET 2024: 200 exporters, 100 metrics each and total number of labels 10
+---Waiting 90 secs for prometheus server to scrape HTTP service discovery---
