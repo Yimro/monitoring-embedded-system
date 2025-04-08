@@ -15,8 +15,12 @@ Python exporter for the sensor nodes, uses the python prometheus exporter librar
 ### custom-exporter-loadtest
 Python script that generates many exporters and a http service discovery server
 
-### images
-![Schematic overview of the project setup]([https://github.com/Yimro/monitoring-embedded-system/blob/main/images/overview.png])
+### setup 1 - overview
+![Schematic overview of project setup 1](https://github.com/Yimro/monitoring-embedded-system/blob/main/images/overview-setup-1.png)
+
+
+### setup 2 - overview
+![Schematic overview of project setup 2](https://github.com/Yimro/monitoring-embedded-system/blob/main/images/overview-setup-2.png)
 
 ### sensor-node-pico-dht20
 Temperature and humidity sensor based on a Raspberry Pico W, written in MicroPython.
