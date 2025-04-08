@@ -2,12 +2,11 @@
 This project is about a monitoring stack that is running on an embedded system. My stack is running on a RP Zero W V1.1 with an ARMv6 CPU and 512 K RAM. The Zero is used to monitor
 - a NAS through Prometheus SNMP Exporter
 - itself through Prometheus Node Exporter
-- some sensors, which publish via MQTT, Data is passed to Prometheus by a homegrown Custom Exporter
+- some sensors ( _sensor-node-pico-dht20_ and _sensor-node-esp32-mhz20_ ), which publish via MQTT
 
-I am not commenting on the SNMP Exporter and Node Exporter as they are pretty much self explaining. Here my code for the sensors and the custom exporter is published.
+The sensor data is exported for Prometheus by a custom exporter, implemented in Python
 
-The custom exporter is written in Python. It imports data from sensors, _sensor-node-pico-dht20_ and _sensor-node-esp32-mhz20_.
-
+I am not commenting on the SNMP Exporter and Node Exporter as they are pretty much self explaining. The code for the sensors and the custom exporter are published in this repository.
 
 
 ### setup 1 - overview
