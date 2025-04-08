@@ -16,7 +16,7 @@ Python exporter for the sensor nodes, uses the python prometheus exporter librar
 Python script that generates many exporters and a http service discovery server
 
 ### images
-Some photos
+![Schematic overview of my project](http://url/to/img.png)
 
 ### sensor-node-pico-dht20
 Temperature and humidity sensor based on a Raspberry Pico W, written in MicroPython.
