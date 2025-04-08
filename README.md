@@ -9,11 +9,6 @@ I am not commenting on the SNMP Exporter and Node Exporter as they are pretty mu
 The custom exporter is written in Python. It imports data from sensors, _sensor-node-pico-dht20_ and _sensor-node-esp32-mhz20_.
 
 
-### custom-exporter-sensors
-Python exporter for the sensor nodes, uses the python prometheus exporter library. This exporter receives data as a MQTT subscriber and exports them.
-
-### custom-exporter-loadtest
-Python script that generates many exporters and a http service discovery server
 
 ### setup 1 - overview
 ![Schematic overview of project setup 1](https://github.com/Yimro/monitoring-embedded-system/blob/main/images/overview-setup-1.png)
@@ -28,3 +23,9 @@ Publishes data (temperature # humidity, crc) every few seconds to a MQTT Broker.
 
 ### sensor-node-esp32-mhz19
 CO2-Sensor connected to a ESP32. Written in C++. Publishes values via MQTT Broker
+
+### custom-exporter-sensors
+Python exporter for the sensor nodes, uses the python prometheus exporter library. This exporter receives data as a MQTT subscriber and exports them.
+
+### custom-exporter-loadtest
+Python script that generates many exporters and a http service discovery server
