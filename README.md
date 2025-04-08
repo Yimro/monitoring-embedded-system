@@ -27,7 +27,7 @@ CO2-Sensor connected to a ESP32. Written in C++. Publishes values via MQTT Broke
 Python exporter for the sensor nodes, uses the python prometheus exporter library. This exporter receives data as a MQTT subscriber and exports them.
 
 ### custom-exporter-loadtest
-Python script that generates many exporters and a http service discovery server
+Python script that generates many exporters and a http service discovery server, only used in setup 2
 
 ### monitoring/prometheus
 Prometheus config files for this project
