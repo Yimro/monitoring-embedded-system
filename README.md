@@ -29,3 +29,6 @@ Python exporter for the sensor nodes, uses the python prometheus exporter librar
 
 ### custom-exporter-loadtest
 Python script that generates many exporters and a http service discovery server
+
+### monitoring/prometheus
+Prometheus config files for this project
