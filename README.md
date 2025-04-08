@@ -4,7 +4,7 @@ This project is about a monitoring stack that is running on an embedded system. 
 - itself through Prometheus Node Exporter
 - some sensors ( _sensor-node-pico-dht20_ and _sensor-node-esp32-mhz20_ ), which publish via MQTT
 
-The sensor data is exported for Prometheus by a custom exporter, implemented in Python
+The sensor data is exported for Prometheus by a custom exporter. It is implemented in Python and acts as a MQTT Subscriber.
 
 I am not commenting on the SNMP Exporter and Node Exporter as they are pretty much self explaining. The code for the sensors and the custom exporter are published in this repository.
 
