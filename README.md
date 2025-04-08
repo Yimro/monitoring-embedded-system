@@ -8,6 +8,7 @@ The sensor data is exported for Prometheus by a custom exporter. It is implement
 
 I am not commenting on the SNMP Exporter and Node Exporter as they are pretty much self explaining. The code for the sensors and the custom exporter are published in this repository.
 
+Setup 1 is a 'proof-of-concept' to show a working system. Setup 2 tests the boundaries of the embedded computer, flooding it with larger amounts of data.
 
 ### setup 1 - overview
 ![Schematic overview of project setup 1](https://github.com/Yimro/monitoring-embedded-system/blob/main/images/overview-setup-1.png)
